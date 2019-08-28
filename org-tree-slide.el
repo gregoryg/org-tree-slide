@@ -181,6 +181,7 @@ nil: keep the same position."
     ;;    (define-key map (kbd "C-x s r") 'org-tree-slide-resume) ;; TODO
     (define-key map (kbd "C-<") 'org-tree-slide-move-previous-tree)
     (define-key map (kbd "C->") 'org-tree-slide-move-next-tree)
+    (define-key map "q" 'org-tree-slide-content)
     map)
   "The keymap for `org-tree-slide'.")
 
