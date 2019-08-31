@@ -73,6 +73,8 @@
 ;;    - see also moom.el (https://github.com/takaxp/moom) to control Emacs frame
 
 ;;; Code:
+;; TODO: Make heading flexible between AUTHOR and INSTRUCTORS
+;; TODO: Do not use headings tagged with :noexport:
 
 (require 'org)
 (require 'org-timer)
