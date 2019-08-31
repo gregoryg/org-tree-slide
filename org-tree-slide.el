@@ -709,6 +709,9 @@ If HEADING-LEVEL is non-nil, the provided outline level is checked."
 (defvar org-tree-slide-author nil
   "If you have \"#+author:\" line in your org buffer, it will be used as a name of the slide author.")
 
+(defvar org-tree-slide-extra nil
+  "If you have \"#+slide_header:\" line in your org buffer, it will be used as an extra line for the header."  )
+
 (defcustom org-tree-slide-breadcrumbs " > "
   "Display breadcrumbs in the slide header.
 
@@ -731,11 +734,14 @@ concat the headers."
       (org-tree-slide--set-header-var-by-regxep
        'org-tree-slide-title "#\\+TITLE:[ \t]*\\(.*\\)$" limit)
       (org-tree-slide--set-header-var-by-regxep
-       'org-tree-slide-author "#\\+AUTHOR:[ \t]*\\(.*\\)$" limit)
+       'org-tree-slide-author "#\\+INSTRUCTORS:[ \t]*\\(.*\\)$" limit)
       (org-tree-slide--set-header-var-by-regxep
        'org-tree-slide-email "#\\+EMAIL:[ \t]*\\(.*\\)$" limit)
       (org-tree-slide--set-header-var-by-regxep
-       'org-tree-slide-startup "#\\+STARTUP:[ \t]*\\(.*\\)$" limit))))
+       'org-tree-slide-startup "#\\+STARTUP:[ \t]*\\(.*\\)$" limit)
+      (org-tree-slide--set-header-var-by-regxep
+       'org-tree-slide-extra "#\\+SLIDE_HEADER:[ \t]*\\(.*\\)$" limit)
+      )))
 
 (defun org-tree-slide--set-header-var-by-regxep (header-variable regexp limit)
   "Set HEADER-VARIABLE using REGEXP.  LIMIT is used to change searching bound."
@@ -784,6 +790,8 @@ Some number of BLANK-LINES will be shown below the header."
                              (concat org-tree-slide-author "  "))
                            (when org-tree-slide-email
                              (concat "<" org-tree-slide-email ">"))
+                           (when org-tree-slide-extra
+                             (concat "\n" org-tree-slide-extra))
                            (when org-tree-slide-breadcrumbs
                              (concat "\n" (org-tree-slide--get-parents
                                            org-tree-slide-breadcrumbs)))
